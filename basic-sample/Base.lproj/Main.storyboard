@@ -97,7 +97,7 @@
                                 <rect key="frame" x="224" y="24" width="152" height="168"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome John Doe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgX-qm-lIU">
-                                <rect key="frame" x="225.5" y="374" width="149.5" height="20.5"/>
+                                <rect key="frame" x="226" y="374" width="150" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -109,13 +109,13 @@
                                     <constraint firstAttribute="height" constant="128" id="ftR-0l-JI2"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diY-8p-aOl">
-                                <rect key="frame" x="147" y="454.5" width="307" height="61.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diY-8p-aOl">
+                                <rect key="frame" x="147" y="454" width="307" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="395" id="2Re-5A-X1M"/>
                                     <constraint firstAttribute="height" constant="61" id="N2X-NZ-dJJ"/>
                                 </constraints>
-                                <state key="normal" title="Call API" backgroundImage="silver-button-normal">
+                                <state key="normal" title="Call Update User API" backgroundImage="silver-button-normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="silver-button-pressed"/>
@@ -129,10 +129,25 @@
                                     <action selector="showSignIn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dfr-we-flr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He5-dj-sJS">
+                                <rect key="frame" x="242" y="412" width="117" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Cne-Le-kcP"/>
+                                    <constraint firstAttribute="width" constant="117" id="JE5-BG-t7e"/>
+                                </constraints>
+                                <state key="normal" title="Logout" backgroundImage="silver-button-normal">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="PuK-vS-oEf" eventType="touchUpInside" id="zmT-WF-Ajh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509799999996" green="0.12941176469999999" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="He5-dj-sJS" firstAttribute="centerX" secondItem="VgX-qm-lIU" secondAttribute="centerX" id="Ava-QI-CzC"/>
                             <constraint firstAttribute="centerX" secondItem="N7C-3V-78C" secondAttribute="centerX" id="Boa-oI-lOQ"/>
+                            <constraint firstItem="diY-8p-aOl" firstAttribute="top" secondItem="He5-dj-sJS" secondAttribute="bottom" constant="12" id="CYk-UN-pUX"/>
                             <constraint firstItem="35P-dk-6PC" firstAttribute="top" secondItem="diY-8p-aOl" secondAttribute="bottom" constant="20" id="F7Z-gs-FnR"/>
                             <constraint firstItem="VgX-qm-lIU" firstAttribute="top" secondItem="N7C-3V-78C" secondAttribute="bottom" constant="40" id="H5m-AL-Ook"/>
                             <constraint firstItem="diY-8p-aOl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VgX-qm-lIU" secondAttribute="bottom" constant="5" id="Mf2-Yg-lxk"/>
@@ -148,6 +163,7 @@
                     <connections>
                         <outlet property="profileImage" destination="N7C-3V-78C" id="Whf-S2-FiJ"/>
                         <outlet property="welcomeLabel" destination="VgX-qm-lIU" id="WlR-jC-fkU"/>
+                        <segue destination="W8Y-0D-WES" kind="show" identifier="showSignin" id="N5D-b0-0AR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdY-AB-VWk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -58,4 +58,14 @@ Once you have that, just clone the project and run the following:
     }];
 }
 ```
+* Logout functionality
+```
+- (void)logout:(id)sender {
+    A0Lock *lock = [[Application sharedInstance] lock];
+    [lock clearSessions];
+    A0SimpleKeychain *keychain = [[Application sharedInstance] store];
+    [keychain clearAll];
+    [self performSegueWithIdentifier:@"showSignin" sender:self];
+}
+```
 Enjoy your iOS app now :).

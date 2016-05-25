@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 
 - (IBAction)callAPI:(id)sender;
+- (IBAction)logout:(id)sender;
 
 @end
 
@@ -49,14 +50,15 @@
 }
 
 - (void)callAPI:(id)sender {
-    //NSURLRequest *request = [self updateUser];
     [self updateUserData];
- //    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [self showMessage:@"We got the secured data successfully"];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [self showMessage:@"Please download the API seed so that you can call it."];
-//    }];
-//    [operation start];
+}
+
+- (void)logout:(id)sender {
+    A0Lock *lock = [[Application sharedInstance] lock];
+    [lock clearSessions];
+    A0SimpleKeychain *keychain = [[Application sharedInstance] store];
+    [keychain clearAll];
+    [self performSegueWithIdentifier:@"showSignin" sender:self];
 }
 
 - (void)showMessage:(NSString *)message {
@@ -70,25 +72,6 @@
     NSString *baseURLString = [[NSBundle mainBundle] infoDictionary][@"SampleAPIBaseURL"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:baseURLString]];
     [request setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
-    return request;
-}
-
-- (NSURLRequest *) updateUser {
-    A0SimpleKeychain *keychain = [[Application sharedInstance] store];
-    A0UserProfile *profile = [NSKeyedUnarchiver unarchiveObjectWithData:[keychain dataForKey:@"profile"]];
-    NSString *token = [keychain stringForKey:@"id_token"];
-    NSString * baseURLString = [NSString stringWithFormat:@"https://vjayaram.au.auth0.com/api/v2/users/%@", profile.userId];
-    NSDictionary *dict = @{
-                           @"firstName" : @"Vikas",
-                           @"lastName" : @"Kannurpatti Jayaram",
-                           @"team" : @"DSE"
-                           };
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:baseURLString]];
-    [request setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
-    NSError * err;
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
-
-    [request setHTTPBody:jsonData];
     return request;
 }
 
