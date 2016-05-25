@@ -16,8 +16,8 @@ Once you have that, just clone the project and run the following:
 
 # Update User profile
 
-1. Create a Network interface with base url `https://{tenant}.auth.com`
-2. Have look at the AFAuth0NetworkApi for implementation method name updateUser.
+* Create a Network interface with base url `https://{tenant}.auth.com`
+* Have look at the AFAuth0NetworkApi for implementation method name updateUser.
 ```
 - (void) updateUser: (NSDictionary *) userMetaData success: (void(^)(NSURLSessionDataTask *task, id response)) success failure: (void(^) (NSURLSessionDataTask *task, NSError *error)) failure {
         A0SimpleKeychain *keychain = [[Application sharedInstance] store];
@@ -34,7 +34,7 @@ Once you have that, just clone the project and run the following:
         }];
 }
 ```
-3. Sample user_metadata payload
+* Sample user_metadata payload
 
 ```
     NSDictionary *dict = @{@"user_metadata": @{
@@ -43,5 +43,19 @@ Once you have that, just clone the project and run the following:
                             @"team" : @"DSE"
                     }};
 ```
-
+* Sample function call
+```
+- (void)callAPI:(id)sender {
+    NSDictionary *dict = @{@"user_metadata": @{
+        @"firstName" : @"Vikas",
+        @"lastName" : @"Kannurpatti Jayaram",
+        @"team" : @"DSE"
+    }};
+    [[AFAuth0NetworkApi sharedClient] updateUser:dict success:^(NSURLSessionDataTask *task, id response) {
+        NSLog(@"response %@", response);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error %@", error);
+    }];
+}
+```
 Enjoy your iOS app now :).
